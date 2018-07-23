@@ -4,7 +4,7 @@
   "private": true,
   "description": "Helping folks get the most out of their network",
   "author": "Makinde Adeagbo",
-  "license": "SEE LICENSE IN LICENSE",
+  "license": "MIT",
   "engines": {
     "node": "10.4.0",
     "npm": "^6.1.0",
