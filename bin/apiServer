@@ -1,9 +1,11 @@
 #!/usr/bin/env node
 
+require('dotenv-safe').config();
+
 const logger = require('morgan');
 const forceSSL = require('express-force-ssl');
 const http = require('http');
-const debug = require('debug')('server');
+const debug = require('debug')('apiServer');
 const apiApp = require('../');
 
 require('engine-strict').check();

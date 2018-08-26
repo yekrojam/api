@@ -18,7 +18,8 @@ module.exports = (schema) => {
   schema.plugin(idValidator);
   schema.plugin(leanVirtuals);
   schema.plugin(selectVirtuals);
-  schema.plugin(authz);
+  // TODO (makinde 8/25/18): Bring back when ready to implement auth across the board
+  // schema.plugin(authz);
 
   // H4x
   schema.post('findOne', (doc) => {

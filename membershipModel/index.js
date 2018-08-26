@@ -24,4 +24,4 @@ membershipSchema.plugin(membershipValidation);
 membershipSchema.plugin(membershipPermissions);
 membershipSchema.plugin(baseSchemaPlugin);
 
-module.exports = mongoose.model('Org', membershipSchema);
+module.exports = mongoose.model('Membership', membershipSchema);
