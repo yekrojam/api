@@ -2,17 +2,14 @@ const mongoose = require('mongoose');
 const debug = require('debug')('majorkey:apiServer:dbConnection');
 
 const { NODE_ENV, MONGO_URI } = process.env;
-const isProd = NODE_ENV === 'production';
-const isDev = NODE_ENV === 'development';
-const accessLiveData = isProd || isDev;
-const URIToUse = accessLiveData ? MONGO_URI : 'http://localhost:27017';
+
 const connectOptions = {
   useNewUrlParser: true,
 };
 
 module.exports = async () => {
   try {
-    await mongoose.connect(URIToUse, connectOptions);
+    await mongoose.connect(MONGO_URI, connectOptions);
   } catch (err) {
     debug(err);
   }
