@@ -8,6 +8,10 @@ const userPermissions = require('./userPermissions');
 const baseSchemaPlugin = require('../utils/baseSchemaPlugin');
 
 const userSchema = new mongoose.Schema({
+  /**
+   * Id used for authentication.
+   */
+  auth: String,
   urlSlug: String,
   name: {
     type: String,

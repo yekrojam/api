@@ -4,6 +4,9 @@ const moment = require('moment');
 const MIN_AGE = 13;
 
 module.exports = (schema) => {
+  schema.path('auth')
+    .required(true, 'An auth id is required');
+
   schema.path('urlSlug')
     .required(true, 'A user must have a URL slug')
     .default(function getDefaultSlug() {
