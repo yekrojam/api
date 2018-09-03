@@ -11,7 +11,7 @@ $ git clone https://github.com/yekrojam/api.git
 
 Install dependencies:
 ```bash
-$ npm install
+$ yarn install
 ```
 
 ## Environment
@@ -20,15 +20,15 @@ Copy the `.env.example` file to `.env` and set the values.
 
 Start the server:
 ```bash
-$ npm run dev
+$ yarn dev
 ```
 
 ## Linting and Tests
 
 ```bash
 # Linting...
-$ npm run lint
+$ yarn lint
 
 # Tests...
-$ npm test
+$ yarn test
 ```
