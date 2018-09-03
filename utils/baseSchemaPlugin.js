@@ -3,7 +3,7 @@ const http = require('http');
 const selectVirtuals = require('mongoose-select-virtuals');
 const leanVirtuals = require('mongoose-lean-virtuals');
 const idValidator = require('mongoose-id-validator');
-const authz = require('mongoose-authz');
+// const authz = require('mongoose-authz');
 const shortId = require('shortid');
 
 module.exports = (schema) => {
