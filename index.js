@@ -27,8 +27,8 @@ restify.serve(router, Membership, restifyOptions);
  */
 router.post('/api/v1/login', async (req, res, next) => {
   try {
-    const {auth} = req.body;
-    const users = await User.find({auth});
+    const { auth } = req.body;
+    const users = await User.find({ auth });
 
     const user = users && users.length ?
       users[0] :
