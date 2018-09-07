@@ -45,8 +45,8 @@ app.use(methodOverride());
 app.use(bodyParser.json());
 app.use(helmet());
 app.use(cors({
-  credentials: IS_PROD,
-  origin: IS_PROD ? true : ['http://localhost:3000'],
+  // `true` enables open access while `false` restricts to the current origin.
+  origin: !IS_PROD,
 }));
 app.use(compression());
 app.use(router);
