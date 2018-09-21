@@ -11,8 +11,8 @@ module.exports = (schema) => {
   schema.path('_id').default(shortId.generate);
 
   schema.set('timestamps', true);
-  schema.set('toObject', { getters: true, versionKey: true });
-  schema.set('toJSON', { getters: true, versionKey: true });
+  schema.set('toObject', { getters: true, versionKey: false });
+  schema.set('toJSON', { getters: true, versionKey: false });
   schema.set('strictQuery', true);
 
   schema.plugin(idValidator);
