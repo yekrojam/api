@@ -8,6 +8,7 @@ const orgSchema = new mongoose.Schema({
   urlSlug: {
     type: String,
     trim: true,
+    lowercase: true,
   },
   name: {
     type: String,
