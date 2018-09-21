@@ -1,5 +1,4 @@
 const test = require('ava');
-const referenceOrg = require('./referenceOrg');
 
 test.todo('URL Slug required');
 test.todo('URL Slug minimum length');
