@@ -4,7 +4,7 @@ const selectVirtuals = require('mongoose-select-virtuals');
 const leanVirtuals = require('mongoose-lean-virtuals');
 const idValidator = require('mongoose-id-validator');
 const beautifyUnique = require('mongoose-beautiful-unique-validation');
-const authz = require('mongoose-authz');
+// const authz = require('mongoose-authz');
 const shortId = require('shortid');
 
 module.exports = (schema) => {
