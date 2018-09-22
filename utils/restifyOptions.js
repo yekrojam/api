@@ -29,6 +29,10 @@ module.exports = {
 
     return next();
   },
+  postDelete: (req, res) => {
+    // Return the id of the just-deleted document to indicate success.
+    res.status(200).json(req.erm.document.id);
+  },
   onError: (err, req, res) => {
     debug(err);
     res.setHeader('Content-Type', 'application/json');
