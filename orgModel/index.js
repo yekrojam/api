@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const orgValidation = require('./orgValidation');
-const orgIndex = require('./orgIndex');
 const orgPermissions = require('./orgPermissions');
 const baseSchemaPlugin = require('../utils/baseSchemaPlugin');
 
@@ -9,6 +8,7 @@ const orgSchema = new mongoose.Schema({
     type: String,
     trim: true,
     lowercase: true,
+    unique: true,
   },
   name: {
     type: String,
@@ -22,7 +22,6 @@ const orgSchema = new mongoose.Schema({
   squareImg: String,
 });
 
-orgSchema.plugin(orgIndex);
 orgSchema.plugin(orgValidation);
 orgSchema.plugin(orgPermissions);
 orgSchema.plugin(baseSchemaPlugin);
