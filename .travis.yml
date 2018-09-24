@@ -1,6 +1,8 @@
 sudo: required
 dist: trusty
 language: node_js
+services:
+  - mongodb
 node_js:
   - "10.4.0"
 cache:
