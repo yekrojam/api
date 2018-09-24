@@ -8,13 +8,13 @@ function getQueryOpts(req) {
       user: req.user,
     },
     permissions: true,
-    lean: { virtuals: true },
   };
 }
 
 module.exports = {
   findOneAndUpdate: false,
   findOneAndRemove: false,
+  lean: { virtuals: true },
   contextFilter: (model, req, done) => {
     done(model.find().setOptions(getQueryOpts(req)));
   },
