@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const membershipValidation = require('./membershipValidation');
-const membershipIndex = require('./membershipIndex');
 const membershipPermissions = require('./membershipPermissions');
 const baseSchemaPlugin = require('../utils/baseSchemaPlugin');
 
@@ -19,7 +18,10 @@ const membershipSchema = new mongoose.Schema({
   }],
 });
 
-membershipSchema.plugin(membershipIndex);
+membershipSchema.index({ org: 1 });
+membershipSchema.index({ user: 1 });
+membershipSchema.index({ org: 1, user: 1 }, { unique: true });
+
 membershipSchema.plugin(membershipValidation);
 membershipSchema.plugin(membershipPermissions);
 membershipSchema.plugin(baseSchemaPlugin);
