@@ -2,13 +2,15 @@ const mongoose = require('mongoose');
 const phoneParser = require('phone');
 const validator = require('validator');
 
-const userIndex = require('./userIndex');
 const userValidation = require('./userValidation');
 const userPermissions = require('./userPermissions');
 const baseSchemaPlugin = require('../utils/baseSchemaPlugin');
 
 const userSchema = new mongoose.Schema({
-  urlSlug: String,
+  urlSlug: {
+    type: String,
+    unique: true,
+  },
   name: {
     type: String,
     trim: true,
@@ -16,6 +18,8 @@ const userSchema = new mongoose.Schema({
   email: {
     type: String,
     trim: true,
+    lowercase: true,
+    unique: true,
     set(email) { return validator.normalizeEmail(email); },
   },
   phone: {
@@ -40,7 +44,8 @@ const userSchema = new mongoose.Schema({
   funImageURL: String,
 });
 
-userSchema.plugin(userIndex);
+userSchema.index({ birthMonth: 1, birthDate: 1 });
+
 userSchema.plugin(userValidation);
 userSchema.plugin(userPermissions);
 userSchema.plugin(baseSchemaPlugin);
