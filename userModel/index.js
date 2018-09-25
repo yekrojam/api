@@ -5,6 +5,7 @@ const validator = require('validator');
 const userValidation = require('./userValidation');
 const userPermissions = require('./userPermissions');
 const baseSchemaPlugin = require('../utils/baseSchemaPlugin');
+const getDefaultUserImageUrl = require('../utils/getDefaultUserImageUrl');
 
 const userSchema = new mongoose.Schema({
   name: {
@@ -33,6 +34,9 @@ const userSchema = new mongoose.Schema({
   imageURL: {
     type: String,
     trim: true,
+    get(imageURL) {
+      return imageURL || getDefaultUserImageUrl(this.email);
+    },
   },
   funImageURL: {
     type: String,

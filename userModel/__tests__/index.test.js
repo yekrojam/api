@@ -4,6 +4,8 @@ const mongoose = require('mongoose');
 const User = require('../');
 const referenceUserData = require('./referenceUserData');
 
+const getDefaultUserImageUrl = require('../../utils/getDefaultUserImageUrl');
+
 test.before(async () => {
   await mongoose.connect('mongodb://localhost:27017/UserIndexTest', { useNewUrlParser: true });
 });
@@ -26,6 +28,15 @@ test.serial('Validate that all fields are present after saving', async (t) => {
   t.is(refUser.birthDate, referenceUserData.birthDate, 'birthDay should be unchanged');
   t.is(refUser.imageURL, referenceUserData.imageURL, 'imageURL should be unchanged');
   t.is(refUser.funImageURL, referenceUserData.funImageURL, 'funImageURL should be unchanged');
+});
+
+test.serial('Ensure a default user image is returned', async (t) => {
+  const refUser = new User({ ...referenceUserData, imageURL: undefined });
+  const defaultImageURL = getDefaultUserImageUrl(refUser.email);
+
+  await refUser.save();
+
+  t.is(refUser.imageURL, defaultImageURL, 'imageURL should not be empty');
 });
 
 test.todo('Name should be properly transformed (trimmed and dup whitespace removed');
