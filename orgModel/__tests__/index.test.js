@@ -5,7 +5,7 @@ const Org = require('../');
 const referenceOrgData = require('./referenceOrgData');
 
 test.before(async () => {
-  await mongoose.connect('mongodb://localhost:27017/IndexTest', { useNewUrlParser: true });
+  await mongoose.connect('mongodb://localhost:27017/OrgIndexTest', { useNewUrlParser: true });
 });
 
 test.beforeEach(async () => {

@@ -7,10 +7,6 @@ const userPermissions = require('./userPermissions');
 const baseSchemaPlugin = require('../utils/baseSchemaPlugin');
 
 const userSchema = new mongoose.Schema({
-  urlSlug: {
-    type: String,
-    unique: true,
-  },
   name: {
     type: String,
     trim: true,
@@ -27,21 +23,21 @@ const userSchema = new mongoose.Schema({
     trim: true,
     set(phone) { return phoneParser(phone, 'USA')[0]; },
   },
-  gender: String,
-  birthYear: {
-    type: Number,
-    set: Math.floor,
+  gender: {
+    type: String,
+    trim: true,
   },
-  birthMonth: {
-    type: Number,
-    set: Math.floor,
+  birthYear: Number,
+  birthMonth: Number,
+  birthDate: Number,
+  imageURL: {
+    type: String,
+    trim: true,
   },
-  birthDate: {
-    type: Number,
-    set: Math.floor,
+  funImageURL: {
+    type: String,
+    trim: true,
   },
-  imageURL: String,
-  funImageURL: String,
 });
 
 userSchema.index({ birthMonth: 1, birthDate: 1 });
