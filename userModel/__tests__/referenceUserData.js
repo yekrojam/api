@@ -1,4 +1,5 @@
 module.exports = {
+  authIdentifier: 'some service|KJKJFKkdlakjd',
   name: 'Sarah Smith',
   email: 'sarah@example.com',
   phone: '+16179875661',
