@@ -6,6 +6,7 @@ const restify = require('express-restify-mongoose');
 const compression = require('compression');
 const helmet = require('helmet');
 const http = require('http');
+const jwt = require('express-jwt');
 const restifyOptions = require('./utils/restifyOptions');
 
 // Verify that the env has everything we need to get started. Fail fast if not
@@ -28,6 +29,10 @@ app.use(
   bodyParser.json(),
   helmet(),
   compression(),
+  jwt({
+    credentialsRequired: process.env.NODE_ENV === 'production',
+    secret: process.env.JWT_SECRET,
+  })
   router,
   (req, res) => {
     res.status(404).json({ message: http.STATUS_CODES[404] });
