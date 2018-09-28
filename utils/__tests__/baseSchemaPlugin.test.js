@@ -80,11 +80,13 @@ test('Correct document references should be allowed', async (t) => {
 test('Virtuals should be returned on lean queries', async (t) => {
   const person = await Person.create({ name: 'findable' });
   const expectedOutput = {
+    _id: person.id,
     id: person.id,
     name: person.name,
     createdAt: person.createdAt,
     updatedAt: person.updatedAt,
     virtual_prop: 'some value',
+    __v: 0,
   };
 
   t.deepEqual(
@@ -104,47 +106,20 @@ test('Virtuals should work in the select statement', async (t) => {
 
   t.deepEqual(
     await Person.find({ name: 'hunt' }, 'virtual_prop').lean().exec(),
-    [{ virtual_prop: 'some value' }],
+    [{ _id: person.id, virtual_prop: 'some value' }],
     'Wrong fields for just a virtual selection',
   );
 
   t.deepEqual(
     await Person.find({ name: 'hunt' }, 'name virtual_prop').lean().exec(),
-    [{ name: 'hunt', virtual_prop: 'some value' }],
+    [{ _id: person.id, name: 'hunt', virtual_prop: 'some value' }],
     'Wrong fields for a real and virtual selection',
   );
 
   t.deepEqual(
     await Person.find({ name: 'hunt' }, 'id name').lean().exec(),
-    [{ id: person.id, name: 'hunt' }],
+    [{ _id: person.id, id: person.id, name: 'hunt' }],
     'Wrong fields for a real and `id` selection',
-  );
-});
-
-test('_id and __v should be removed in lean queries', async (t) => {
-  const person = await Person.create({ name: 'fishing' });
-  const expectedOutput = {
-    name: person.name,
-    createdAt: person.createdAt,
-    updatedAt: person.updatedAt,
-  };
-
-  t.deepEqual(
-    await Person.find({ name: 'fishing' }).lean().exec(),
-    [expectedOutput],
-    'Atrifacts remain when alling `Query.find`',
-  );
-
-  t.deepEqual(
-    await Person.findOne({ name: 'fishing' }).lean().exec(),
-    expectedOutput,
-    'Artifacts remain when calling `Query.findOne`',
-  );
-
-  t.deepEqual(
-    await Person.findOneAndUpdate({ name: 'fishing' }, {}).lean().exec(),
-    expectedOutput,
-    'Artifacts remain when calling `Query.findOneAndUpdate`',
   );
 });
 

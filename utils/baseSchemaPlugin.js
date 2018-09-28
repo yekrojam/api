@@ -26,21 +26,4 @@ module.exports = (schema) => {
   schema.plugin(leanVirtuals);
   schema.plugin(selectVirtuals);
   schema.plugin(beautifyUnique);
-
-  // We want to strip out `_id` and `__v` from lean qeries, just like we do with `toJSON` and
-  // `toObject`.
-  function stripDocumentArtifacts(res) {
-    if (!this._mongooseOptions.lean) return;
-
-    const docs = Array.isArray(res) ? res : [res];
-
-    docs.forEach((doc) => {
-      delete doc._id; // eslint-disable-line no-param-reassign
-      delete doc.__v; // eslint-disable-line no-param-reassign
-    });
-  }
-
-  schema.post('find', stripDocumentArtifacts);
-  schema.post('findOne', stripDocumentArtifacts);
-  schema.post('findOneAndUpdate', stripDocumentArtifacts);
 };
