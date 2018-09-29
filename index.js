@@ -32,7 +32,7 @@ app.use(
   jwt({
     credentialsRequired: process.env.NODE_ENV === 'production',
     secret: process.env.JWT_SECRET,
-  })
+  }),
   router,
   (req, res) => {
     res.status(404).json({ message: http.STATUS_CODES[404] });
