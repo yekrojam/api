@@ -19,13 +19,18 @@ restify.serve(router, User, restifyOptions);
 restify.serve(router, Membership, restifyOptions);
 
 const app = express();
-app.use(methodOverride());
-app.use(bodyParser.json());
-app.use(helmet());
-app.use(compression());
-app.use(router);
-app.use((req, res) => {
-  res.status(404).json({ message: http.STATUS_CODES[404] });
-});
+app.use(
+  '/api',
+  methodOverride(),
+  bodyParser.json(),
+  helmet(),
+  compression(),
+  router,
+  (req, res) => {
+    res.status(404).json({ message: http.STATUS_CODES[404] });
+  },
+);
+
+// TODO: add error handler so errors thrown by the middleware get handled nicely
 
 module.exports = app;
