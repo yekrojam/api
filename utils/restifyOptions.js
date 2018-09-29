@@ -12,6 +12,7 @@ function getQueryOpts(req) {
 }
 
 module.exports = {
+  prefix: '',
   findOneAndUpdate: false,
   findOneAndRemove: false,
   lean: { virtuals: true },
