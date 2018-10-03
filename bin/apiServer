@@ -1,7 +1,5 @@
 #!/usr/bin/env node
 
-require('dotenv-safe').config();
-
 const logger = require('morgan');
 const forceSSL = require('express-force-ssl');
 const http = require('http');
