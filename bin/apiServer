@@ -1,7 +1,5 @@
 #!/usr/bin/env node
 
-require('dotenv-safe').config();
-
 const logger = require('morgan');
 const forceSSL = require('express-force-ssl');
 const http = require('http');
@@ -62,6 +60,9 @@ if (isProd) {
 /**
  * Listen on provided port, on all network interfaces.
  */
-server.listen(port, () => { debug('listening'); });
+server.listen(port, () => {
+  debug('listening');
+  if (process.send) process.send('online');
+});
 server.on('error', onError);
 server.on('listening', onListening);
