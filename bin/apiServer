@@ -60,9 +60,6 @@ if (isProd) {
 /**
  * Listen on provided port, on all network interfaces.
  */
-server.listen(port, () => {
-  debug('listening');
-  if (process.send) process.send('online');
-});
+server.listen(port, () => { debug('listening'); });
 server.on('error', onError);
 server.on('listening', onListening);
