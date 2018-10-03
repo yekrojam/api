@@ -1,5 +1,5 @@
-require('dotenv-safe').config();
 
+const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
@@ -8,6 +8,10 @@ const compression = require('compression');
 const helmet = require('helmet');
 const http = require('http');
 const restifyOptions = require('./utils/restifyOptions');
+
+require('dotenv-safe').config({
+  example: path.join(__dirname, '.env.example'),
+});
 
 require('./utils/connectMongoose')();
 
