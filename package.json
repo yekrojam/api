@@ -58,7 +58,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-push": "npm ci && npm run lint && npm test"
+      "pre-push": "npm ci && npm run lint"
     }
   }
 }
