@@ -1,5 +1,4 @@
 
-const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
@@ -10,7 +9,7 @@ const http = require('http');
 const restifyOptions = require('./utils/restifyOptions');
 
 require('dotenv-safe').config({
-  example: path.join(__dirname, '.env.example'),
+  example: require.resolve('./.env.example'),
 });
 
 require('./utils/connectMongoose')();
