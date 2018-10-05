@@ -1,6 +1,6 @@
+const _ = require('lodash');
 const debug = require('debug')('api');
 const populateObjForElement = require('mongoose-populate-options/populateObjForElement');
-
 
 function getQueryOpts(req) {
   return {
@@ -39,6 +39,15 @@ module.exports = {
     res.setHeader('Content-Type', 'application/json');
 
     const status = req.erm.statusCode || 400;
-    res.status(status).json({ message: err.message });
+    let errorToShow = { message: err.message };
+    if (err.name === 'ValidationError') {
+      // Send back details to the client so they can intelligently tell the user what's up
+      errorToShow = {
+        message: err._message, // eslint-disable-line no-underscore-dangle
+        name: err.name,
+        errors: _.mapValues(err.errors, 'message'),
+      };
+    }
+    res.status(status).json(errorToShow);
   },
 };
