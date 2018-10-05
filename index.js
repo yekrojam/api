@@ -3,11 +3,14 @@ const compression = require('compression');
 const cors = require('cors');
 const express = require('express');
 const helmet = require('helmet');
-const http = require('http');
 const methodOverride = require('method-override');
 const restify = require('express-restify-mongoose');
+const jwt = require('express-jwt');
 
 const restifyOptions = require('./utils/restifyOptions');
+const errorHandler = require('./middleware/errorHandler');
+const notFound = require('./middleware/notFound');
+const devTokenHandler = require('./middleware/devTokenHandler');
 
 // Verify that the env has everything we need to get started. Fail fast if not
 require('./utils/envVerification').verify();
@@ -23,6 +26,7 @@ restify.serve(router, User, restifyOptions);
 restify.serve(router, Membership, restifyOptions);
 
 const app = express();
+
 app.use(
   '/api',
   methodOverride(),
@@ -30,12 +34,11 @@ app.use(
   cors(), // Enable cors for all requests
   helmet(),
   compression(),
+  devTokenHandler,
+  jwt({ secret: process.env.JWT_SECRET }).unless(req => !!req.user),
   router,
-  (req, res) => {
-    res.status(404).json({ message: http.STATUS_CODES[404] });
-  },
+  notFound,
+  errorHandler,
 );
-
-// TODO: add error handler so errors thrown by the middleware get handled nicely
 
 module.exports = app;
