@@ -8,7 +8,7 @@ const helmet = require('helmet');
 const http = require('http');
 const restifyOptions = require('./utils/restifyOptions');
 
-// Verify thatt he env has everything we need to get started. Fail fast if not
+// Verify that the env has everything we need to get started. Fail fast if not
 require('./utils/envVerification').verify();
 require('./utils/connectMongoose')();
 

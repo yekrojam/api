@@ -1,6 +1,6 @@
 const Joi = require('joi');
 /**
- * Verifies what environment variables are needed at are present and well formed
+ * Verifies which environment variables are required, present and well formed
  */
 module.exports = {
   verify() {
