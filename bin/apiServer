@@ -1,12 +1,13 @@
 #!/usr/bin/env node
 
+require('engine-strict').check(); // Check node version ASAP
+require('dotenv').load(); // and get the environment set up
+
 const logger = require('morgan');
 const forceSSL = require('express-force-ssl');
 const http = require('http');
 const debug = require('debug')('apiServer');
 const apiApp = require('../');
-
-require('engine-strict').check();
 
 const isProd = process.env.NODE_ENV === 'production';
 const port = parseInt(process.env.PORT, 10) || 4000;

@@ -8,10 +8,8 @@ const helmet = require('helmet');
 const http = require('http');
 const restifyOptions = require('./utils/restifyOptions');
 
-require('dotenv-safe').config({
-  example: require.resolve('./.env.example'),
-});
-
+// Verify thatt he env has everything we need to get started. Fail fast if not
+require('./utils/envVerification').verify();
 require('./utils/connectMongoose')();
 
 const Org = require('./orgModel');
