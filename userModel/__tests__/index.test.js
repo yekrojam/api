@@ -29,8 +29,10 @@ test.serial('Validate that all fields are present after saving', async (t) => {
 });
 
 test.todo('Name should be properly transformed (trimmed and dup whitespace removed');
+test.todo('User should be queryable via authIdentifier');
+test.todo('Authentication ID should be unique');
+test.todo('Authentication should never be returned');
 test.todo('Email should be properly transformed');
-test.todo('Email\'s must be unique');
 test.todo('Phone should be properly transformed');
 test.todo('Gender should be properly transformed');
 test.todo('ImageURL should be properly transformed');

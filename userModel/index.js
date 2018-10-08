@@ -7,6 +7,11 @@ const userPermissions = require('./userPermissions');
 const baseSchemaPlugin = require('../utils/baseSchemaPlugin');
 
 const userSchema = new mongoose.Schema({
+  authIdentifier: {
+    type: String,
+    unique: true,
+    select: false,
+  },
   name: {
     type: String,
     trim: true,
@@ -15,7 +20,6 @@ const userSchema = new mongoose.Schema({
     type: String,
     trim: true,
     lowercase: true,
-    unique: true,
     set(email) { return validator.normalizeEmail(email); },
   },
   phone: {
