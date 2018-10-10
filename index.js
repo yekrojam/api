@@ -1,11 +1,12 @@
-
-const express = require('express');
 const bodyParser = require('body-parser');
-const methodOverride = require('method-override');
-const restify = require('express-restify-mongoose');
 const compression = require('compression');
+const cors = require('cors');
+const express = require('express');
 const helmet = require('helmet');
 const http = require('http');
+const methodOverride = require('method-override');
+const restify = require('express-restify-mongoose');
+
 const restifyOptions = require('./utils/restifyOptions');
 
 // Verify that the env has everything we need to get started. Fail fast if not
@@ -26,6 +27,11 @@ app.use(
   '/api',
   methodOverride(),
   bodyParser.json(),
+  cors({
+    // `true` enables open access.
+    // `false` restricts to the current origin.
+    origin: process.env.NODE_ENV === 'development',
+  }),
   helmet(),
   compression(),
   router,
