@@ -18,6 +18,12 @@ module.exports = (schema) => {
     versionKey: false,
     transform(doc, ret) {
       const { _id, ...rest } = ret;
+
+      // Because documents `mongoose-authz` adds the list of permissions directly
+      // to the document (myDoc.permissions = {...}), they don't get serialized
+      // by default. Do it manually here.
+      if (doc.permissions) { rest.permissions = doc.permissions; }
+
       return rest;
     },
   };

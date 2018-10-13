@@ -128,6 +128,7 @@ test('Virtuals should work in the select statement', async (t) => {
 });
 
 test.todo('Population is functional');
+test.todo('Make sure permissions are properly serialized');
 
 test('authz plugin gets installed for schemas with permissions', (t) => {
   // Janky way of testing to see if the plugin is present, but this is the only marker
