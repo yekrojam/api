@@ -14,6 +14,10 @@ personSchema.plugin(baseSchemaPlugin);
 
 const Person = mongoose.model('Person', personSchema);
 
+const authzSchema = new mongoose.Schema({});
+authzSchema.permissions = { foo: {} };
+authzSchema.plugin(baseSchemaPlugin);
+
 test.before(async () => {
   await mongoose.connect(
     'mongodb://localhost:27017/BaseSchemaPluginTest',
@@ -124,6 +128,21 @@ test('Virtuals should work in the select statement', async (t) => {
 });
 
 test.todo('Population is functional');
+
+test('authz plugin gets installed for schemas with permissions', (t) => {
+  // Janky way of testing to see if the plugin is present, but this is the only marker
+  // that the plugin leaves.
+  t.is(
+    personSchema.query.setAuthLevel,
+    undefined,
+    'The authz plugin should not be installed when no permissions are set',
+  );
+
+  t.truthy(
+    authzSchema.query.setAuthLevel,
+    'authz plugin should be installed when permissions are set',
+  );
+});
 
 test.after.always(async () => {
   await mongoose.disconnect();
