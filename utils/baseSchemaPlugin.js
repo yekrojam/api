@@ -37,6 +37,7 @@ module.exports = (schema) => {
   schema.plugin(populateOptions);
 
   if (schema.permissions) {
-    schema.plugin(authz);
+    // Allow the create method until the express-restify-mongoose lib is patched
+    schema.plugin(authz, { allowedMethods: ['create', 'remove'] });
   }
 };
