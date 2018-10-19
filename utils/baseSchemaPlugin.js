@@ -1,8 +1,8 @@
 const selectVirtuals = require('mongoose-select-virtuals');
 const leanVirtuals = require('mongoose-lean-virtuals');
 const idValidator = require('mongoose-id-validator');
-const beautifyUnique = require('mongoose-beautiful-unique-validation');
 const shortId = require('shortid');
+const uniqueValidator = require('mongoose-unique-validator');
 
 module.exports = (schema) => {
   schema.path('_id', String);
@@ -25,5 +25,5 @@ module.exports = (schema) => {
   schema.plugin(idValidator);
   schema.plugin(leanVirtuals);
   schema.plugin(selectVirtuals);
-  schema.plugin(beautifyUnique);
+  schema.plugin(uniqueValidator);
 };
