@@ -70,7 +70,7 @@ test.serial('Orgs with the same URL slug', async (t) => {
 
   await t.throwsAsync(
     Promise.all([refOrg1.save(), refOrg2.save()]),
-    { name: 'ValidationError' },
+    { name: 'MongoError' },
     'Orgs with same URL Slugs should not be allowed',
   );
 });
@@ -81,7 +81,7 @@ test.serial('Orgs with same URL slug but different cases', async (t) => {
 
   await t.throwsAsync(
     Promise.all([refOrg1.save(), refOrg2.save()]),
-    { name: 'ValidationError' },
+    { name: 'MongoError' },
     'Orgs with url slugs in different cases shouldn\'t be allowed',
   );
 });
