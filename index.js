@@ -27,11 +27,7 @@ app.use(
   '/api',
   methodOverride(),
   bodyParser.json(),
-  cors({
-    // `true` enables open access.
-    // `false` restricts to the current origin.
-    origin: process.env.NODE_ENV === 'development',
-  }),
+  cors(), // Enable cors for all requests
   helmet(),
   compression(),
   router,
