@@ -35,7 +35,7 @@ module.exports = (schema) => {
       function hasBirthDate(month) {
         return month === undefined || (this.birthDate !== undefined);
       },
-      'A birth month must be specified in conjuction with a birth date',
+      'A birth month must be specified in conjunction with a birth date',
     );
 
   schema.path('birthDate')
@@ -44,7 +44,7 @@ module.exports = (schema) => {
       function hasBirthMonth(date) {
         return date === undefined || (this.birthMonth !== undefined);
       },
-      'A birth date must be specified in conjuction with a birth month',
+      'A birth date must be specified in conjunction with a birth month',
     )
     .validate(
       function dateMonthYearIsValid(date) {
