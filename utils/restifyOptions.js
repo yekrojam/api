@@ -1,11 +1,10 @@
-const _ = require('lodash');
-const debug = require('debug')('api');
 const populateObjForElement = require('mongoose-populate-options/populateObjForElement');
+const errorHandler = require('../middleware/errorHandler');
 
 function getQueryOpts(req) {
   return {
     authPayload: {
-      user: req.user,
+      userId: req.user.id,
     },
     permissions: true,
   };
@@ -16,6 +15,7 @@ module.exports = {
   findOneAndUpdate: false,
   findOneAndRemove: false,
   lean: { virtuals: true },
+  onError: errorHandler,
   contextFilter: (model, req, done) => {
     done(model.find().setOptions(getQueryOpts(req)));
   },
@@ -33,21 +33,5 @@ module.exports = {
   postDelete: (req, res) => {
     // Return the id of the just-deleted document to indicate success.
     res.status(200).json(req.erm.document.id);
-  },
-  onError: (err, req, res) => {
-    debug(err);
-    res.setHeader('Content-Type', 'application/json');
-
-    const status = req.erm.statusCode || 400;
-    let errorToShow = { message: err.message };
-    if (err.name === 'ValidationError') {
-      // Send back details to the client so they can intelligently tell the user what's up
-      errorToShow = {
-        message: err._message, // eslint-disable-line no-underscore-dangle
-        name: err.name,
-        errors: _.mapValues(err.errors, 'message'),
-      };
-    }
-    res.status(status).json(errorToShow);
   },
 };

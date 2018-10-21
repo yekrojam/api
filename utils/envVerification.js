@@ -8,6 +8,7 @@ module.exports = {
       MONGODB_URI: Joi.string().uri().required(),
       NODE_ENV: Joi.valid('production', 'development', 'test').required(),
       DEBUG: Joi.string(),
+      JWT_SECRET: Joi.string().required(),
     };
 
     const result = Joi.validate(
