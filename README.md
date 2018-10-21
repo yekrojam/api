@@ -1,6 +1,7 @@
 # API
 
 [![build status](https://img.shields.io/travis/yekrojam/api/master.svg?style=flat-square)](https://travis-ci.org/yekrojam/api)
+[![Dependency Freshness](https://david-dm.org/yekrojam/api.svg)](https://david-dm.org/yekrojam/api)
 
 ## Installation
 
