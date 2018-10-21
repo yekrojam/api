@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const phoneParser = require('phone');
 const validator = require('validator');
+const md5 = require('md5');
 
 const userValidation = require('./userValidation');
 const userPermissions = require('./userPermissions');
@@ -38,6 +39,12 @@ const userSchema = new mongoose.Schema({
     type: String,
     trim: true,
   },
+});
+
+userSchema.virtual('defaultedImageURL').get(function getDefaultedImageURL() {
+  if (this.imageURL) { return this.imageURL; }
+
+  return `https://s.gravatar.com/avatar/${md5(this.email)}?d=identicon&s=480`;
 });
 
 userSchema.index({ birthMonth: 1, birthDate: 1 });
