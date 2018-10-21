@@ -21,7 +21,7 @@ test.serial('Validate that all fields are present after saving', async (t) => {
   const originalNavImg = refOrg.navImg;
   const originalSquareImg = refOrg.squareImg;
 
-  await refOrg.save();
+  await refOrg.save({ authLevel: false });
 
   t.is(refOrg.urlSlug, originalURLSlug, 'URLSlug should be unchanged');
   t.is(refOrg.name, originalName, 'Name should be unchanged');
@@ -59,7 +59,10 @@ test.serial('Orgs with different URL slugs', async (t) => {
   const refOrg2 = new Org({ ...referenceOrgData, urlSlug: 'someNewSlug' });
 
   await t.notThrowsAsync(
-    Promise.all([refOrg1.save(), refOrg2.save()]),
+    Promise.all([
+      refOrg1.save({ authLevel: false }),
+      refOrg2.save({ authLevel: false }),
+    ]),
     'Orgs with different URL Slugs should be able to be saved',
   );
 });
@@ -69,7 +72,10 @@ test.serial('Orgs with the same URL slug', async (t) => {
   const refOrg2 = new Org(referenceOrgData);
 
   await t.throwsAsync(
-    Promise.all([refOrg1.save(), refOrg2.save()]),
+    Promise.all([
+      refOrg1.save({ authLevel: false }),
+      refOrg2.save({ authLevel: false }),
+    ]),
     { name: 'ValidationError' },
     'Orgs with same URL Slugs should not be allowed',
   );
@@ -80,7 +86,10 @@ test.serial('Orgs with same URL slug but different cases', async (t) => {
   const refOrg2 = new Org({ ...referenceOrgData, urlSlug: 'SOMENEWSLUG' });
 
   await t.throwsAsync(
-    Promise.all([refOrg1.save(), refOrg2.save()]),
+    Promise.all([
+      refOrg1.save({ authLevel: false }),
+      refOrg2.save({ authLevel: false }),
+    ]),
     { name: 'ValidationError' },
     'Orgs with url slugs in different cases shouldn\'t be allowed',
   );

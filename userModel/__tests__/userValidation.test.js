@@ -5,7 +5,7 @@ test.todo('Email is required');
 test.todo('Email is valid');
 test.todo('Valid phone number formats');
 test.todo('Birth year is round number');
-test.todo('Birth year not ficticiously old');
+test.todo('Birth year not fictitiously old');
 test.todo('Minors are prevented from the service');
 test.todo('Birth month is round number');
 test.todo('Birth month is in range');
