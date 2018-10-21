@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const membershipValidation = require('./membershipValidation');
 const membershipPermissions = require('./membershipPermissions');
+const membershipConstants = require('./membershipConstants');
 const baseSchemaPlugin = require('../utils/baseSchemaPlugin');
 
 const membershipSchema = new mongoose.Schema({
@@ -14,7 +15,7 @@ const membershipSchema = new mongoose.Schema({
   },
   roles: [{
     type: String,
-    enum: ['MEMBER', 'ADMIN'],
+    enum: Object.values(membershipConstants.ROLES),
   }],
 });
 
@@ -26,4 +27,8 @@ membershipSchema.plugin(membershipValidation);
 membershipSchema.plugin(membershipPermissions);
 membershipSchema.plugin(baseSchemaPlugin);
 
-module.exports = mongoose.model('Membership', membershipSchema);
+const membershipModel = mongoose.model('Membership', membershipSchema);
+
+Object.assign(membershipModel, membershipConstants);
+
+module.exports = membershipModel;
