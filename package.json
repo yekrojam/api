@@ -40,9 +40,10 @@
     "mongoose-id-validator": "0.4.3",
     "mongoose-lean-virtuals": "0.3.0",
     "mongoose-populate-options": "1.1.1",
-    "mongoose-select-virtuals": "2.0.0",
+    "mongoose-select-virtuals": "3.0.0",
     "morgan": "1.9.0",
     "phone": "2.0.0",
+    "resourcejs": "github:makinde/resourcejs#2e8a53e",
     "shortid": "2.2.8",
     "validator": "10.3.0"
   },
