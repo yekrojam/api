@@ -11,6 +11,7 @@ const notFound = require('./middleware/notFound');
 const devTokenHandler = require('./middleware/devTokenHandler');
 
 const v1Router = require('./v1');
+const v2Router = require('./v2');
 
 // Verify that the env has everything we need to get started. Fail fast if not
 require('./utils/envVerification').verify();
@@ -28,6 +29,7 @@ app.use(
   devTokenHandler,
   jwt({ secret: process.env.JWT_SECRET }).unless(req => !!req.user),
   v1Router,
+  v2Router,
   notFound,
   errorHandler,
 );

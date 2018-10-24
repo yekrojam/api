@@ -1,5 +1,8 @@
-const http = require('http');
-
 module.exports = (req, res) => {
-  res.status(404).json({ message: http.STATUS_CODES[404] });
+  if (!res.headersSent) {
+    res.status(404).json({
+      status: 404,
+      errors: ['Resource not found'],
+    });
+  }
 };

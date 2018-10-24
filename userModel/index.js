@@ -44,7 +44,7 @@ const userSchema = new mongoose.Schema({
 userSchema.virtual('defaultedImageURL').get(function getDefaultedImageURL() {
   if (this.imageURL) { return this.imageURL; }
 
-  return `https://s.gravatar.com/avatar/${md5(this.email)}?d=identicon&s=480`;
+  return `https://s.gravatar.com/avatar/${md5(this.email || '')}?d=identicon&s=480`;
 });
 
 userSchema.index({ birthMonth: 1, birthDate: 1 });

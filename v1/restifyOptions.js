@@ -1,14 +1,6 @@
 const populateObjForElement = require('mongoose-populate-options/populateObjForElement');
 const errorHandler = require('../middleware/errorHandler');
-
-function getQueryOpts(req) {
-  return {
-    authPayload: {
-      userId: req.user.id,
-    },
-    permissions: true,
-  };
-}
+const getQueryOpts = require('../utils/getQueryOpts');
 
 module.exports = {
   prefix: '',
@@ -24,7 +16,7 @@ module.exports = {
       req.erm.query.populate = populateObjForElement(
         req.erm.query.populate,
         getQueryOpts(req),
-        ['sort', 'limit', 'skip'],
+        ['sort', 'limit', 'skip', 'select'],
       );
     }
 
