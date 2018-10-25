@@ -13,16 +13,17 @@ const settingSchema = new mongoose.Schema({
     type: String,
   },
   value: {
-    type: String,
-    required: [true, 'You must use a specific setting type'],
-    set() { throw new Error('You must use a specific setting type'); },
+    type: mongoose.Schema.Types.Mixed,
   },
 });
 
 settingSchema.set('discriminatorKey', 'kind');
 
 // There should only be one setting of each kind for any given object.
-settingSchema.index({ target: 1, kind: 1 }, { unique: true });
+settingSchema.index({ kind: 1, target: 1 }, { unique: true });
+
+// You can lookup values for a certain kind
+settingSchema.index({ kind: 1, value: 1 });
 
 settingSchema.plugin(settingValidation);
 settingSchema.plugin(settingHooks);

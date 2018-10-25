@@ -1,3 +1,4 @@
+const _ = require('lodash');
 const mongoose = require('mongoose');
 const Setting = require('../Setting');
 
@@ -6,7 +7,7 @@ const ApprovedCookieSetting = Setting.discriminator(
   new mongoose.Schema({
     value: {
       type: Boolean,
-      default: false,
+      get(val) { return _.defaultTo(val, false); },
     },
   }),
 );
