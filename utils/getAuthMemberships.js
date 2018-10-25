@@ -1,7 +1,7 @@
 const Membership = require('../membershipModel');
 
 /**
- * EUsed in request middleware. Almost all of the authorization checks require that we
+ * Used in request middleware. Almost all of the authorization checks require that we
  * know which organizations the acting user is a member of. So we pre-fetch it
  * here so it's only done once. This is called on every API request, so we try
  * to get the minimal set of data and make it as light as possible.
