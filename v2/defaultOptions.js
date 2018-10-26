@@ -31,6 +31,18 @@ module.exports = {
       next();
     },
   ],
+  beforeIndex: [],
+  beforePost: [],
+  beforeGet: [],
+  beforePut: [],
+  beforePatch: [],
+  beforeDelete: [],
+  // after: [],
+  afterIndex: [],
+  afterPost: [],
+  afterGet: [],
+  afterPut: [],
+  afterPatch: [],
   afterDelete: [
     function customDeleteResponse(req, res, next) {
       const { resource } = req;
