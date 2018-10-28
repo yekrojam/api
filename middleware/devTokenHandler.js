@@ -8,7 +8,7 @@ module.exports = (req, res, next) => {
     && req.query.token
     && !req.user
   ) {
-    req.user = JSON.parse(req.query.token);
+    req.user = req.query.token;
 
     // remove the query param so nothing downstream applies it to the query
     delete req.query.token;
