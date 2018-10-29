@@ -12,8 +12,14 @@ module.exports = async function emailToUserId(req, res, next) {
   const { user: { id, email } } = req;
   if (id || !email) return next();
 
-  const { _id: userId } = await User.findOne({ email }, '_id').exec();
-  _.set(req, 'user.id', userId);
+  const user = await User
+    .findOne({ email }, '_id')
+    .setAuthLevel(false)
+    .exec();
+
+  if (user && user._id) {
+    _.set(req, 'user.id', user._id);
+  }
 
   return next();
 };
