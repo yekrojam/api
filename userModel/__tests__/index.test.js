@@ -7,16 +7,14 @@ const referenceUserData = require('./referenceUserData');
 
 test.before(async () => {
   await mongoose.connect('mongodb://localhost:27017/UserIndexTest', { useNewUrlParser: true });
-});
-
-test.beforeEach(async () => {
   await User.remove({});
 });
+
 
 test.serial('Validate that all fields are present after saving', async (t) => {
   const refUser = new User(referenceUserData);
 
-  await refUser.save();
+  await refUser.save({ authLevel: false });
 
   t.is(refUser.name, referenceUserData.name, 'name should be unchanged');
   t.is(refUser.email, referenceUserData.email, 'email should be unchanged');
