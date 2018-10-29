@@ -17,7 +17,7 @@ function setPopulateOptionsHook(req, res, item, next) {
   // the query. When passed to `get()`, the `item` is the search object. Poor
   // API.
   //
-  // To reliably get the query, we read it from `this.modelQuery` since we know
+  // To reliably get the query, we read it from `req.modelQuery` since we know
   // it should hold a reference because we set it in an earlier handler.
   //
   // Also, we do this logic in a hook (as opposed to a handler) because the populate
