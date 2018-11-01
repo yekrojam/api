@@ -1,4 +1,5 @@
 const getQueryOpts = require('../utils/getQueryOpts');
+// const errorHandler = require('../middleware/errorHandler');
 
 function setModelQueryHandler(req, res, next) {
   const queryOpts = getQueryOpts(req);
@@ -46,7 +47,7 @@ module.exports = {
   beforePut: [setWriteOptionsHandler],
   beforePatch: [setWriteOptionsHandler],
   beforeDelete: [setWriteOptionsHandler],
-  // after: [],
+  // after: [errorHandler], // Bring this back once this lands: https://github.com/travist/resourcejs/pull/94
   afterIndex: [],
   afterPost: [],
   afterGet: [],
