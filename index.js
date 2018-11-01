@@ -4,13 +4,11 @@ const cors = require('cors');
 const express = require('express');
 const helmet = require('helmet');
 const methodOverride = require('method-override');
-const jwt = require('express-jwt');
 
 const errorHandler = require('./middleware/errorHandler');
 const notFound = require('./middleware/notFound');
-const devTokenHandler = require('./middleware/devTokenHandler');
 const loadMemberships = require('./middleware/loadMemberships');
-const emailToUserId = require('./middleware/emailToUserId');
+const userFromToken = require('./middleware/userFromToken');
 
 const v1Router = require('./v1');
 const v2Router = require('./v2');
@@ -28,9 +26,7 @@ app.use(
   cors(), // Enable cors for all requests
   helmet(),
   compression(),
-  devTokenHandler,
-  jwt({ secret: process.env.JWT_SECRET }).unless(req => !!req.user),
-  emailToUserId,
+  userFromToken,
   loadMemberships,
   v1Router,
   v2Router,
