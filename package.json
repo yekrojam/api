@@ -33,6 +33,7 @@
     "lodash": "4.17.10",
     "md5": "2.2.1",
     "method-override": "2.3.10",
+    "middleware-flow": "0.8.0",
     "moment": "2.22.2",
     "mongoose": "5.2.8",
     "mongoose-authz": "2.0.0-3",
