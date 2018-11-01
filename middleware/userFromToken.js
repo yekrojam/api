@@ -1,5 +1,6 @@
 const _ = require('lodash');
 const jwt = require('express-jwt');
+const Sentry = require('@sentry/node');
 const { series } = require('middleware-flow');
 
 const User = require('../userModel');
@@ -46,8 +47,16 @@ async function emailToUserId(req, res, next) {
   return next();
 }
 
+function setSentryUserScope(req, res, next) {
+  Sentry.configureScope((scope) => {
+    scope.setUser(req.user);
+  });
+  next();
+}
+
 module.exports = series(
   devTokenHandler,
   jwt({ secret: process.env.JWT_SECRET }).unless(req => !!req.user),
   emailToUserId,
+  setSentryUserScope,
 );
