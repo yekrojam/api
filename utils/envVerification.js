@@ -9,6 +9,7 @@ module.exports = {
       NODE_ENV: Joi.valid('production', 'development', 'test').required(),
       DEBUG: Joi.string(),
       JWT_SECRET: Joi.string().required(),
+      SENTRY_DSN: Joi.string().uri(),
     };
 
     const result = Joi.validate(

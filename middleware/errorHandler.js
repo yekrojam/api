@@ -1,7 +1,8 @@
 const _ = require('lodash');
+const Sentry = require('@sentry/node');
 const debug = require('debug')('majorkey2api');
 
-module.exports = (err, req, res, next) => { // eslint-disable-line no-unused-vars
+function errorFormatter(err, req, res, next) { // eslint-disable-line no-unused-vars
   debug(err);
 
   const status = _.get(req, 'erm.statusCode', 400);
@@ -18,5 +19,15 @@ module.exports = (err, req, res, next) => { // eslint-disable-line no-unused-var
 
   res.setHeader('Content-Type', 'application/json');
   res.status(status).json(errorToShow);
-};
+}
 
+// Call the sentry error handler and our own. The bundle them together like this so
+// it unit can be easily used in multiple places.
+module.exports = (err, req, res, next) => {
+  Sentry.Handlers.errorHandler()(
+    err,
+    req,
+    res,
+    errorFormatter.bind(null, err, req, res, next),
+  );
+};

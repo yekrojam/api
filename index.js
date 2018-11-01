@@ -4,6 +4,7 @@ const cors = require('cors');
 const express = require('express');
 const helmet = require('helmet');
 const methodOverride = require('method-override');
+const Sentry = require('@sentry/node');
 
 const errorHandler = require('./middleware/errorHandler');
 const notFound = require('./middleware/notFound');
@@ -17,10 +18,16 @@ const v2Router = require('./v2');
 require('./utils/envVerification').verify();
 require('./utils/connectMongoose')();
 
+const { SENTRY_DSN, NODE_ENV } = process.env;
+if (SENTRY_DSN) {
+  Sentry.init({ dsn: SENTRY_DSN, environment: NODE_ENV });
+}
+
 const app = express();
 
 app.use(
   '/api',
+  Sentry.Handlers.requestHandler(),
   methodOverride(),
   bodyParser.json(),
   cors(), // Enable cors for all requests
