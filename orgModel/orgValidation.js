@@ -11,13 +11,13 @@ module.exports = (schema) => {
 
   schema.path('name')
     .required(true, 'An organization must have a name')
-    .maxlength(100, 'An organization name must be no more than 50 characters');
+    .maxlength(50, 'An organization name must be no more than 50 characters');
 
   schema.path('description')
     .required(true, 'A description of the organization is required')
-    .maxlength(100, 'An organization name must be no more than 1000 characters');
+    .maxlength(1000, 'An organization name must be no more than 1000 characters');
 
-  const URLValidationOptions = { protocols: ['https'], require_protocol: true };
+  const URLValidationOptions = { protocols: ['https'], require_protocol: true, require_host: true };
   schema.path('navImg')
     .validate(
       img => validator.isURL(img, URLValidationOptions),
