@@ -3,9 +3,9 @@ const restify = require('express-restify-mongoose');
 
 const restifyOptions = require('./restifyOptions');
 
-const Org = require('../orgModel');
-const User = require('../userModel');
-const Membership = require('../membershipModel');
+const {
+  Org, User, Membership,
+} = require('../models');
 
 const router = express.Router();
 restify.serve(router, Org, restifyOptions);

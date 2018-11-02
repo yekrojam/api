@@ -3,7 +3,7 @@ const jwt = require('express-jwt');
 const Sentry = require('@sentry/node');
 const { series } = require('middleware-flow');
 
-const User = require('../userModel');
+const { User } = require('../models');
 
 /**
  * For development, loads a plain text auth token from the query params.

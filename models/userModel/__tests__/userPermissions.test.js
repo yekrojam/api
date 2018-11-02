@@ -7,7 +7,7 @@ const Org = require('../../orgModel');
 const referenceUserData = require('./referenceUserData');
 const referenceOrgData = require('../../orgModel/__tests__/referenceOrgData');
 
-const getAuthMemberships = require('../../utils/getAuthMemberships');
+const getAuthMemberships = require('../../../utils/getAuthMemberships');
 
 test.before(async (t) => {
   await mongoose.connect('mongodb://localhost:27017/UserPermissionsTest', { useNewUrlParser: true });
