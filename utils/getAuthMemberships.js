@@ -1,4 +1,4 @@
-const Membership = require('../membershipModel');
+const { Membership } = require('../models');
 
 /**
  * Used in request middleware. Almost all of the authorization checks require that we

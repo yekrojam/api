@@ -3,10 +3,9 @@ const Resource = require('resourcejs');
 const defaultOptions = require('./defaultOptions');
 const settingOptions = require('./settingOptions');
 
-const Org = require('../orgModel');
-const User = require('../userModel');
-const Membership = require('../membershipModel');
-const Setting = require('../settingModel');
+const {
+  Org, User, Membership, Setting,
+} = require('../models');
 
 const router = express.Router();
 
