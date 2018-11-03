@@ -1,3 +1,7 @@
+// Verify that the env has everything we need to get started. Fail fast if not.
+require('./utils/envVerification').verify();
+require('./utils/connectMongoose')();
+
 const bodyParser = require('body-parser');
 const compression = require('compression');
 const cors = require('cors');
@@ -13,10 +17,6 @@ const userFromToken = require('./middleware/userFromToken');
 
 const v1Router = require('./v1');
 const v2Router = require('./v2');
-
-// Verify that the env has everything we need to get started. Fail fast if not
-require('./utils/envVerification').verify();
-require('./utils/connectMongoose')();
 
 const { SENTRY_DSN, NODE_ENV } = process.env;
 if (SENTRY_DSN) {

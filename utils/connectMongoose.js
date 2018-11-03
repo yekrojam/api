@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const debug = require('debug')('majorkey:apiServer:dbConnection');
+const debug = require('debug')('majorkey2api:dbConnection');
 
 const { NODE_ENV, MONGODB_URI } = process.env;
 const isProd = NODE_ENV === 'production';
@@ -13,6 +13,7 @@ const connectOptions = {
 module.exports = async () => {
   try {
     await mongoose.connect(URIToUse, connectOptions);
+    debug('Connected to DB');
   } catch (err) {
     debug(err);
   }
