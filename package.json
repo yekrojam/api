@@ -12,8 +12,8 @@
   },
   "scripts": {
     "lint": "eslint .",
-    "start": "node --optimize_for_size --max_old_space_size=460 --gc_interval=100 ./bin/apiServer",
-    "dev": "nodemon ./bin/apiServer",
+    "start": "express-app-server",
+    "dev": "nodemon -x express-app-server",
     "test": "ava **/*test.js"
   },
   "dependencies": {
@@ -25,7 +25,7 @@
     "dotenv": "6.0.0",
     "engine-strict": "1.0.0",
     "express": "4.16.3",
-    "express-force-ssl": "0.3.2",
+    "express-app-server": "1.0.4",
     "express-jwt": "5.3.1",
     "express-restify-mongoose": "5.0.0",
     "feathers-mongoose": "6.1.2",
@@ -43,7 +43,6 @@
     "mongoose-lean-virtuals": "0.3.0",
     "mongoose-populate-options": "1.1.1",
     "mongoose-select-virtuals": "3.0.0",
-    "morgan": "1.9.0",
     "phone": "2.0.0",
     "resourcejs": "1.28.0",
     "shortid": "2.2.8",
