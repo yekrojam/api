@@ -44,7 +44,7 @@
     "mongoose-populate-options": "1.1.1",
     "mongoose-select-virtuals": "3.0.0",
     "phone": "2.0.0",
-    "resourcejs": "1.28.0",
+    "resourcejs": "1.29.0",
     "shortid": "2.2.8",
     "validator": "10.3.0"
   },
